@@ -21,6 +21,11 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'firstname',
+        'lastname',
+        'state',
+        'country',
+        'profpix',
     ];
 
     /**
@@ -43,5 +48,8 @@ class User extends Authenticatable
     ];
     public function discussion(){
         return $this->hasMany(Discussion::class);
+    }
+    public function replies(){
+        return $this->hasMany(Reply::class);
     }
 }

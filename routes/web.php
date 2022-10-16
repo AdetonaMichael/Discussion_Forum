@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\DiscussionController;
+use App\Http\Controllers\RepliesController;
+use App\Http\Controllers\UsersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,4 +23,6 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::resource('discussion', DiscussionController::class);
+Route::resource('discussions', DiscussionController::class);
+Route::resource('users', UsersController::class);
+Route::resource('discussions/{discussionId}/reply', RepliesController::class);

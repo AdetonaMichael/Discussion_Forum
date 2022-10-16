@@ -8,17 +8,17 @@
                 <div class="card-header"><b>{{ __('Add Discussion') }}</b></div>
 
                 <div class="card-body">
-                    @if($errors->any()){
-                        <div class="alert danger">
+                    @if($errors->any())
+                        <div class="alert  alert-danger">
                             <ul>
                                 @foreach ($errors->all() as $error)
-                                   <li>{{ $error  }}</li>
+                                   <li class="text-danger text-center">{{ $error  }}</li>
                                 @endforeach
                             </ul>
                         </div>
-                    }
+
                     @endif
-                    <form action="{{route('discussion.store') }}" method="POST">
+                    <form action="{{route('discussions.store') }}" method="POST">
                         @csrf
                         <div class="form-group">
                             <label for="title">Title</label>
@@ -52,6 +52,11 @@
 @endsection
 
 @section('css')
+<style>
+    body{
+        background:linear-gradient(to bottom, rgb(26, 4, 87), rgb(37, 3, 163));
+    }
+</style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/trix/1.3.1/trix.min.css" integrity="sha512-5m1IeUDKtuFGvfgz32VVD0Jd/ySGX7xdLxhqemTmThxHdgqlgPdupWoSN8ThtUSLpAGBvA8DY2oO7jJCrGdxoA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 @endsection
 

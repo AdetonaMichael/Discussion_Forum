@@ -7,12 +7,14 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Dicsussion Forum') }}</title>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
     @yield('css')
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -21,7 +23,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
+                    {{ config('app.name', 'Discussion Forum') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -60,6 +62,10 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                    @auth
+                                     <a class="dropdown-item" href="{{ route('users.edit', auth()->user()->id)}}">Profile</a>
+                                     @endauth
+
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
@@ -74,16 +80,23 @@
 
 
               <div class="container">
-                <div class="row d-flex justify-content-center">
+                <div style="height:100vh;" class="row d-flex justify-content-center">
                     @auth
                     <div class="col-md-4">
-                        <main class="py-4">
-                      <ul class="list-group">
-                        @foreach ($channels as $channel )
-                        <li class="list-group-item mb-2">{{$channel->name }}</li>
-                        @endforeach
-                      </ul>
-                        </main>
+                         <div class="card mt-4">
+                            <div class="card-header">Channels</div>
+                            <a  style="background:rgb(26, 4, 87); color:white;" class="btn btn-info text-white mt-4 mx-3" href="{{ route('discussions.create') }}"><i class="fa fa-plus"></i> Add Discussion</a>
+                            <div class="card-body">
+                                <main class="py-4">
+                                    <ul class="list-group">
+                                      @foreach ($channels as $channel )
+                                      <li class="list-group-item mb-2">{{$channel->name }}</li>
+                                      @endforeach
+                                    </ul>
+                                </main>
+                            </div>
+                         </div>
+
                     </div>
                     @endauth
                     <div class="col-md-8">
@@ -95,6 +108,15 @@
         </div>
 
     </div>
+    @include('partials.footer')
     @yield('js')
+    <script src="{{ asset('js/toastr.min.js') }}"></script>
+<script>
+        @if(Session::has('success'))
+        toastr.success("{{ session()->get('success') }}")
+        @elseif (Session::has('error'))
+        toastr.error("{{ session()->get('success')  }}")
+        @endif
+</script>
 </body>
 </html>

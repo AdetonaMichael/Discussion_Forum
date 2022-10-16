@@ -50,7 +50,7 @@ class DiscussionController extends Controller
             'channel_id'=>$request->channel,
         ]);
         session()->flash('success', 'Discussion Posted');
-        return redirect(route('discussion.index'));
+        return redirect(route('discussions.index'));
     }
 
     /**
@@ -61,7 +61,7 @@ class DiscussionController extends Controller
      */
     public function show(Discussion $discussion)
     {
-        //
+        return view('discussions.show')->with('discussion', $discussion);
     }
 
     /**
