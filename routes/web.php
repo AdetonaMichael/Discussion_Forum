@@ -25,4 +25,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('discussions', DiscussionController::class);
 Route::resource('users', UsersController::class);
-Route::resource('discussions/{discussionId}/reply', RepliesController::class);
+Route::resource('discussions/{discussion}/reply', RepliesController::class);

@@ -27,19 +27,28 @@
             <div class="card">
                 <div class="card-header">Add Reply</div>
                 <div class="card-body">
+
+                        @if ($errors->any())
+                        <div class="alert alert-danger">
+                         @foreach ($errors->all() as $error)
+                        <p class="text-center text-danger">
+                            {{ $error}}
+                        </p>
+                         @endforeach
+                        </div>
+                        @endif
                     @auth
                     <form action="{{ route('reply.store', $discussion->slug) }}" method="POST">
                         @csrf
-
                         <div class="form-group">
-                            <input type="hidden" name="reply" id="reply" type="text">
-                            <trix-editor input="reply"></trix-editor>
+                            <input type="hidden" name="content" id="reply" >
+                            <trix-editor input="content"></trix-editor>
                         </div>
+                       <button type="submit" class="btn btn-success btn-sm mt-2">Reply</button>
                        </form>
                     @else
                     <a class="btn btn-primary" href="{{ route('login') }}">Sign In To Reply</a>
                     @endauth
-                    <button type="submit" class="btn btn-success btn-sm mt-2">Reply</button>
                 </div>
             </div>
 

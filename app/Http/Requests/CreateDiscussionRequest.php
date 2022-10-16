@@ -26,7 +26,6 @@ class CreateDiscussionRequest extends FormRequest
         return [
             'title'=>'required',
             'content'=>'required',
-            'channel'=>'required'
         ];
     }
 }
