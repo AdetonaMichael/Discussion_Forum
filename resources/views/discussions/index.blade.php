@@ -4,6 +4,7 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
+            @if ($discussions->count() > 0)
             @foreach ($discussions as $discussion)
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
@@ -20,6 +21,13 @@
                 </div>
             </div>
             @endforeach
+            @else
+  <div class="card">
+    <div class="card body">
+        <h2 class="text-danger text-center pt-2">There's No Discussion Yet</h2>
+    </div>
+  </div>
+@endif
         </div>
         <div class="text-center">
             {{$discussions->links()}}
@@ -27,6 +35,7 @@
     </div>
 </div>
 @endsection
+
 
 @section('css')
 <style>

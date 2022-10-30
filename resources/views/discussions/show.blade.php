@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card mb-4">
-                <div class="card-header d-flex justify-content-between">
+                <div style="background:#1a0457; color:white;"  class="card-header d-flex justify-content-between">
                     <div class="pix">
                         <img style="width:40px; height:40px; border-radius:45px;" src="{{ '../assets/uploads/profpix/'.$discussion->user->profpix }}" alt="user-image">
                         <b style="margin-left: 20px;">{{ $discussion->user->name }}</b>
@@ -20,12 +20,65 @@
                     </p>
                     <hr>
                      {!! $discussion->content !!}
+                     @if($discussion->bestReply)
+                     <div class="card">
+                        <div style="background:#81bfa2;" class="card-header text-white d-flex justify-content-between">
+                            <div>
+                                <img style="width:40px; height:40px; border-radius:45px;" src="{{ '../assets/uploads/profpix/'.$discussion->bestReply->owner->profpix }}" alt="user-image">
+                                <span>{{ $discussion->bestReply->owner->name }}</span>
+                            </div>
+                            <div class="mt-2">
+                                <strong>Best Reply</strong>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                           {!! $discussion->bestReply->content  !!}
+                        </div>
+                     </div>
+                     @endif
                 </div>
             </div>
 
+            @foreach ($discussion->replies()->paginate(3) as $reply)
+               <div class="card my-2">
+                 <div style="background-color: #0b002d; color: white;" class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <div>
+                            <img style="width:40px; height:40px; border-radius:45px;" src="{{ '../assets/uploads/profpix/'.$reply->owner->profpix }}" alt="user-image">
+                            <span>{{ $reply->owner->name }}</span>
+                        </div>
+                        <div>
+                            @auth
+                            @if(auth()->user()->id == $discussion->user_id)
+                            @if($errors->any())
+                            @foreach ($errors->all() as $error)
+                            <div class="alert alert-danger">
+                                <p class="text-center text-danger">{{ $error }}</p>
+                            </div>
+                            @endforeach
+                            @endif
+                            <form action="{{ route('discussions.best-reply', ['discussion'=>$discussion->slug, 'reply'=>$reply->id]) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-sm btn-light">Mark as Best</button>
+
+                            </form>
+                            @endif
+                            @endauth
+                        </div>
+                    </div>
+                 </div>
+                 <div class="card-body">
+                   {!! $reply->content  !!}
+                </div>
+               </div>
+            @endforeach
+
+            <div class="d-flex justify-content-center">
+                {{ $discussion->replies()->paginate(1)->links()}}
+            </div>
 
             <div class="card">
-                <div class="card-header">Add Reply</div>
+                <div class="card-header bg-white">Add Reply</div>
                 <div class="card-body">
 
                         @if ($errors->any())
@@ -41,10 +94,10 @@
                     <form action="{{ route('reply.store', $discussion->slug) }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <input type="hidden" name="content" id="reply" >
-                            <trix-editor input="content"></trix-editor>
+                            <input type="hidden" name="content" id="content" >
+                            <trix-editor name="content" input="content"></trix-editor>
                         </div>
-                       <button type="submit" class="btn btn-success btn-sm mt-2">Reply</button>
+                       <button style="background-color: #0b002d;" type="submit" class="btn btn-success btn-sm mt-2">Reply</button>
                        </form>
                     @else
                     <a class="btn btn-primary" href="{{ route('login') }}">Sign In To Reply</a>

@@ -14,7 +14,7 @@ class Reply extends Model
         'content',
     ];
 
-    public function user(){
+    public function owner(){
         return $this->belongsTo(User::class, 'user_id');
     }
 

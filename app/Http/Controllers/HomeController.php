@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Models\Channel;
+use Illuminate\Support\Str;
 class HomeController extends Controller
 {
     /**
@@ -24,5 +25,18 @@ class HomeController extends Controller
     public function index()
     {
         return view('home');
+    }
+    public function store_channel(Request $request){
+        $request->validate([
+            'name'=>'required',
+        ]);
+
+        $channel = new Channel();
+        $channel->name = $request->name;
+        $channel->slug = Str::slug($request->name);
+        $channel->save();
+
+        session()->flash('success', 'Channel Added Successfully...');
+        return redirect()->back();
     }
 }

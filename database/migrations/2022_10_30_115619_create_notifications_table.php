@@ -13,14 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('discussions', function (Blueprint $table) {
-            $table->id();
-            $table->integer('user_id');
-            $table->string('title');
-            $table->text('content');
-            $table->integer('reply_id')->nullable();
-            $table->integer('channel_id');
-            $table->string('slug')->unique();
+        Schema::create('notifications', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('type');
+            $table->morphs('notifiable');
+            $table->text('data');
+            $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('discussions');
+        Schema::dropIfExists('notifications');
     }
 };

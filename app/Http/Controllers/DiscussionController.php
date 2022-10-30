@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateDiscussionRequest;
 use App\Models\Discussion;
+use App\Models\Reply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -85,6 +86,12 @@ class DiscussionController extends Controller
     public function update(Request $request, Discussion $discussion)
     {
         //
+    }
+
+    public function reply(Discussion $discussion, Reply $reply){
+         $discussion->markAsBestReply($reply);
+         session()->flash('success','Marked As Best Reply');
+         return redirect()->back();
     }
 
     /**
