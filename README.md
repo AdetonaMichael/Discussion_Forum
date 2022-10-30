@@ -1,4 +1,5 @@
-![discuss](https://user-images.githubusercontent.com/36950610/196061613-43b15f8b-f651-4c58-9952-49faa8cdb121.PNG)
+![discuss2](https://user-images.githubusercontent.com/36950610/198882859-91d7dbcf-1574-4bf1-8907-85b7bf4b4801.PNG)
+
 <br>
 # Ultimata Discussion Forum
 <hr>
