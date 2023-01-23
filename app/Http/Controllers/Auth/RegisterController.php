@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Events\WelcomeUserEvent;
+use App\Events\SendWelcomeMessageEvent;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
@@ -70,7 +70,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
         ]);
-        event(new WelcomeUserEvent($user));
+        event(new SendWelcomeMessageEvent($user));
         return $user;
     }
 }
