@@ -1,0 +1,129 @@
+/*
+---------------------------------------------
+banner
+---------------------------------------------
+*/
+
+.main-banner {
+    position: relative;
+  }
+
+  #bg-video {
+      min-width: 100%;
+      min-height: 80vh;
+      max-width: 100%;
+      max-height: 80vh;
+      object-fit: cover;
+      z-index: -1;
+  }
+
+  #bg-video::-webkit-media-controls {
+      display: none !important;
+  }
+
+  .video-overlay {
+      position: absolute;
+      background: url('../assets/img/discussbg.jpg');
+      top: 0;
+      left: 0;
+      background-size: cover;
+      background-repeat: no-repeat;
+      bottom: 7px;
+      width: 100%;
+      height:80vh;
+  }
+
+  .main-banner .caption {
+    text-align: left;
+    position: absolute;
+    width: 80%;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+  .main-banner .caption h6 {
+    margin-top: 0px;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 0.5px;
+  }
+
+
+  .main-banner .caption h2 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-size: 84px;
+    text-transform: uppercase;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+  @media screen and (max-width:900px){
+    .main-banner .caption h2{
+          font-size: 45px;
+    }
+}
+.three-card{
+    position:relative;
+    top:-96px;
+}
+@media screen and (max-width:900px){
+    .three-card .card{
+        margin-top:10px;
+    }
+}
+  .main-banner .caption h2 em {
+    font-style: normal;
+    color: rgb(26, 4, 87);
+    font-weight: 900;
+  }
+
+  .footer {
+    padding-top: 90px;
+    padding-bottom: 45px;
+    background-color: #111111;
+  }
+  .footer p {
+    color: #fff;
+    opacity: 0.8;
+    font-size: 14px;
+  }
+
+  .bg-black {
+    background: #111;
+  }
+
+  .footer-menu li a {
+    color: #fff;
+    opacity: 0.8;
+    font-size: 14px;
+  }
+  .footer-menu li a:hover {
+    color: rgb(245, 99, 75);
+    opacity: 1;
+  }
+
+  .lh-40 {
+    line-height: 40px;
+  }
+
+  .footer-socials li a {
+    color: #fff;
+    opacity: 0.8;
+  }
+
+  .recent-blog a {
+    line-height: 1.5;
+    font-size: 14px;
+  }
+
+  .footer-socials li a {
+    color: #595b65;
+    font-size: 18px;
+    padding-left: 10px;
+  }
+
+  /* the navbar code  */

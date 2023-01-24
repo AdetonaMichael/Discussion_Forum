@@ -22,97 +22,49 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Discussion Forum') }}
-
-
-                </a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav me-auto">
-
-                    </ul>
-
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ms-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                </li>
-                            @endif
-
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                                </li>
-                            @endif
-                        @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                <span class="fas fa-bell fa-2x"></span><sup><span class="badge rounded-pill text-bg-danger">{{ auth()->user()->unreadNotifications->count() }}</span></sup>
-                                    {{ Auth::user()->name }}
-                                </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-                                    @auth
-                                     <a class="dropdown-item" href="{{ route('users.edit', auth()->user()->id)}}">Profile</a>
-                                     <a class="dropdown-item" href="{{ route('discussions.index')}}">Discussions</a>
-                                     @endauth
-
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
-
-
-              <div class="container">
+              <div class="container-fluid">
                 <div style="height:100vh;" class="row d-flex justify-content-center">
                     @auth
-                    <div class="col-md-4">
-                         <div class="card mt-4">
-                            <div class="card-header d-flex justify-content-between">Channels
-                                 <!-- Button trigger modal -->
-<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    <span class="fas fa-plus"></span>
-  </button>
-                            </div>
-                            <a  style="background:rgb(26, 4, 87); color:white;" class="btn btn-info text-white mt-4 mx-3" href="{{ route('discussions.create') }}"><i class="fa fa-plus"></i> Add Discussion</a>
-                            <div class="card-body">
-                                <main class="py-4">
-                                    <ul class="list-group">
-                                      @foreach ($channels as $channel )
-                                      <li class="list-group-item mb-2">{{$channel->name }}</li>
-                                      @endforeach
-                            </div>
-                         </div>
+                    @if (Request::is('/'))
+                    <div>
 
                     </div>
+                    @else
+                    <div class="col-md-4">
+                        <div class="card mt-4">
+                           <div class="card-header d-flex justify-content-between">Channels
+                                <!-- Button trigger modal -->
+<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+   <span class="fas fa-plus"></span>
+ </button>
+                           </div>
+                           <a  style="background:rgb(26, 4, 87); color:white;" class="btn btn-info text-white mt-4 mx-3" href="{{ route('discussions.create') }}"><i class="fa fa-plus"></i> Add Discussion</a>
+                           <div class="card-body">
+                               <main class="py-4">
+                                   <ul class="list-group">
+                                     @foreach ($channels as $channel )
+                                     <li class="list-group-item mb-2">{{$channel->name }}</li>
+                                     @endforeach
+                           </div>
+                        </div>
+
+                   </div>
+                    @endif
+
                     @endauth
+                    @if(Request::is('/'))
+                        <div class="col-md-12">
+                            <main>
+                                @yield('content')
+                            </div>
+                        </div>
+                    @else
                     <div class="col-md-8">
                         <main class="py-4">
                             @yield('content')
                         </main>
                     </div>
+                    @endif
               </div>
         </div>
 
