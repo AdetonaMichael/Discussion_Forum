@@ -21,6 +21,11 @@
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <body>
+    @if(Request::is('/'))
+     <div></div>
+    @else
+     @include('includes.nav')
+    @endif
     <div id="app">
               <div class="container-fluid">
                 <div style="height:100vh;" class="row d-flex justify-content-center">
