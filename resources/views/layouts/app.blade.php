@@ -7,8 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Dicsussion Forum') }}</title>
-
+    <title>{{ config('app.name', 'Geo Discuss') }}</title>
+     <link rel="icon" href="{{ asset('assets/img/logo.PNG') }}"
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -39,16 +39,15 @@
                         <div class="card mt-4">
                            <div class="card-header d-flex justify-content-between">Channels
                                 <!-- Button trigger modal -->
-<button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
-   <span class="fas fa-plus"></span>
- </button>
+                     <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"><span class="fas fa-plus"></span>
+                     </button>
                            </div>
                            <a  style="background:rgb(26, 4, 87); color:white;" class="btn btn-info text-white mt-4 mx-3" href="{{ route('discussions.create') }}"><i class="fa fa-plus"></i> Add Discussion</a>
                            <div class="card-body">
                                <main class="py-4">
                                    <ul class="list-group">
                                      @foreach ($channels as $channel )
-                                     <li class="list-group-item mb-2">{{$channel->name }}</li>
+                                     <li id="channel-item" class="list-group-item mb-2 my-2">{{$channel->name }}</li>
                                      @endforeach
                            </div>
                         </div>

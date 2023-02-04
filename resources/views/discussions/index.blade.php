@@ -9,8 +9,14 @@
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between">
                     <div class="pix">
+                        @if(isset(auth()->user()->profpix))
                         <img style="width:40px; height:40px; border-radius:45px;" src="{{ 'assets/uploads/profpix/'.$discussion->user->profpix }}" alt="user-image">
+                        @else
+                        <img alt="profpix" src={{ asset('assets/img/profpix.jpg')}} height="40" width="40" style="border-radius:45px">
+                        @endif
+                        @auth
                         <b style="margin-left: 20px;">{{ $discussion->user->name }}</b>
+                        @endauth
                     </div>
                     <div class="pix-btn">
                         <a class="btn btn-success btn-sm" href="{{ route('discussions.show', $discussion->slug)}}">View</a>

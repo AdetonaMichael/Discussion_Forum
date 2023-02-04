@@ -26,9 +26,8 @@ Auth::routes();
 
 Route::post('discussions/{discussion}/replies/{reply}/mark-as-best-reply', [DiscussionController::class,'reply'])->name('discussions.best-reply');
 
-Route::group(['prefix'=>'users'], function(){
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-});
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 Route::resource('discussions', DiscussionController::class);
 Route::resource('users', UsersController::class);
 Route::resource('discussions/{discussion}/reply', RepliesController::class);

@@ -6,7 +6,16 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header"><img style="border-radius: 45px;" src="{{ '/assets/uploads/profpix/'.auth()->user()->profpix }}" alt="user-image" height=40 width=40><b></b></div>
+
+                <div class="card-header">
+                    @if(isset(auth()->user()->profpix))
+                    <img style="border-radius: 45px;" src="{{ '/assets/uploads/profpix/'.auth()->user()->profpix }}" alt="user-image" height=40 width=40>
+                    @else
+                    <img alt="profpix" src={{ asset('assets/img/profpix.jpg')}} height="40" width="40" style="border-radius:45px">
+                    @endif
+                    @auth
+                    <b>{{ auth()->user()->name }}</b></div>
+                    @endauth
 
                 <div class="card-body text-center">
                     Dashboard

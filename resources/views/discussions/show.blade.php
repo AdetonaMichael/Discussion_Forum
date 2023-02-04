@@ -7,8 +7,14 @@
             <div class="card mb-4">
                 <div style="background:#1a0457; color:white;"  class="card-header d-flex justify-content-between">
                     <div class="pix">
+                        @if(isset(auth()->user->profpoix))
                         <img style="width:40px; height:40px; border-radius:45px;" src="{{ '../assets/uploads/profpix/'.$discussion->user->profpix }}" alt="user-image">
+                        @else
+                        <img style="width:40px; height:40px; border-radius:45px;" src="{{ asset('assets/img/profpix.jpg') }}" alt="profpix">
+                        @endif
+                        @auth
                         <b style="margin-left: 20px;">{{ $discussion->user->name }}</b>
+                        @endauth
                     </div>
                     <div class="pix-btn">
                         <a class="btn btn-success btn-sm" href="{{ route('discussions.show', $discussion->slug)}}">View</a>
@@ -24,7 +30,11 @@
                      <div class="card">
                         <div style="background:#81bfa2;" class="card-header text-white d-flex justify-content-between">
                             <div>
+                                @if(isset($discussion->bestReply->owner->profpix))
                                 <img style="width:40px; height:40px; border-radius:45px;" src="{{ '../assets/uploads/profpix/'.$discussion->bestReply->owner->profpix }}" alt="user-image">
+                                @else
+                                <img src="{{ asset('assets/img/profpix.jpg') }}" alt="profpix" style="height: 40px; width:40px;">
+                                @endif
                                 <span>{{ $discussion->bestReply->owner->name }}</span>
                             </div>
                             <div class="mt-2">
@@ -44,7 +54,11 @@
                  <div style="background-color: #0b002d; color: white;" class="card-header">
                     <div class="d-flex justify-content-between">
                         <div>
+                            @if(isset($reply->owner->profpix))
                             <img style="width:40px; height:40px; border-radius:45px;" src="{{ '../assets/uploads/profpix/'.$reply->owner->profpix }}" alt="user-image">
+                            @else
+                            <img src="{{ asset('assets/img/profpix.jpg') }}" height="40px" width="40px" style="border-radius: 45px" alt="profpix">
+                            @endif
                             <span>{{ $reply->owner->name }}</span>
                         </div>
                         <div>
